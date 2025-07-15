@@ -11,12 +11,6 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-    List<Employee> employees = new ArrayList<>(Arrays.asList(
-            new Employee(1, "Sana", "Developer"),
-            new Employee(2, "Jaya", "Product Manager"),
-            new Employee(3, "dhana", "Data Analyst")
-    ));
-
     @Autowired
     private EmployeeRepo empRepo;
 
@@ -40,17 +34,17 @@ public class EmployeeService {
         empRepo.save(employee);
         return "Employee added successfully";
     }
-
-
-    public Employee updateEmployee(int id, Employee updatedEmployee) {
-        return empRepo.findById(id).map(employee -> {
-            employee.setName(updatedEmployee.getName());
-            employee.setJob(updatedEmployee.getJob());
-            return empRepo.save(employee);
-        }).orElse(null);
-
-
-    }
+//
+//
+//    public Employee updateEmployee(int id, Employee updatedEmployee) {
+//        return empRepo.findById(id).map(employee -> {
+//            employee.setName(updatedEmployee.getName());
+//            employee.setJob(updatedEmployee.getJob());
+//            return empRepo.save(employee);
+//        }).orElse(null);
+//
+//
+//    }
 
 
     public void deleteEmployee(int id) {

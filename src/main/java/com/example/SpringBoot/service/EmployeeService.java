@@ -1,12 +1,12 @@
+
+
 package com.example.SpringBoot.service;
+
 import com.example.SpringBoot.model.Employee;
 import com.example.SpringBoot.repository.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 
 @Service
 public class EmployeeService {
@@ -34,22 +34,16 @@ public class EmployeeService {
         empRepo.save(employee);
         return "Employee added successfully";
     }
-//
-//
-//    public Employee updateEmployee(int id, Employee updatedEmployee) {
-//        return empRepo.findById(id).map(employee -> {
-//            employee.setName(updatedEmployee.getName());
-//            employee.setJob(updatedEmployee.getJob());
-//            return empRepo.save(employee);
-//        }).orElse(null);
-//
-//
-//    }
 
+    public Employee updateEmployee(int id, Employee updatedEmployee) {
+        return empRepo.findById(id).map(employee -> {
+            employee.setName(updatedEmployee.getName());
+            employee.setJob(updatedEmployee.getJob());
+            return empRepo.save(employee);
+        }).orElse(null);
+    }
 
     public void deleteEmployee(int id) {
         empRepo.deleteById(id);
     }
-
-
 }

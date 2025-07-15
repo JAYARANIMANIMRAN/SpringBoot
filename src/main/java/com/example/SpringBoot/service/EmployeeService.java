@@ -1,5 +1,7 @@
 package com.example.SpringBoot.service;
 import com.example.SpringBoot.model.Employee;
+import com.example.SpringBoot.repository.EmployeeRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,19 +11,35 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-        List<Employee> emp = new ArrayList<>(Arrays.asList(new Employee(1,"sana",  "developer"), new Employee(2,"jaya","product manager"))
-        );
-        public String getMethod(){
-            return "This is GET Method";
-        }
-        public String postMethod(){
-            return "This is POST Method";
-        }
-        public String putMethod(){
-            return "This is PUT Method";
-        }
-        public String deleteMethod(){
-            return "This is DELETE Method";
-        }
+    List<Employee> employees = new ArrayList<>(Arrays.asList(
+            new Employee(1, "Sana", "Developer"),
+            new Employee(2, "Jaya", "Product Manager"),
+            new Employee(3, "dhana", "Data Analyst")
+    ));
+
+    @Autowired
+    private EmployeeRepo empRepo;
+
+    public List<Employee> getAllEmployees() {
+        return empRepo.findAll();
+    }
+
+    public Employee getEmployeeById(int id) {
+        return empRepo.findById(id).orElse(null);
+    }
+
+    public List<Employee> getEmployeesByJob(String job) {
+        return empRepo.findByJob(job);
+    }
+
+    public Employee getEmployeesByID(int empID) {
+        return empRepo.findById(empID).orElse(null);
+    }
+
+    public String addEmployee(Employee employee) {
+        empRepo.save(employee);
+        return "Employee added successfully";
+    }
+
 
 }

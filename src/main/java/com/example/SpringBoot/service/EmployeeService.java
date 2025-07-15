@@ -42,4 +42,20 @@ public class EmployeeService {
     }
 
 
+    public Employee updateEmployee(int id, Employee updatedEmployee) {
+        return empRepo.findById(id).map(employee -> {
+            employee.setName(updatedEmployee.getName());
+            employee.setJob(updatedEmployee.getJob());
+            return empRepo.save(employee);
+        }).orElse(null);
+
+
+    }
+
+
+    public void deleteEmployee(int id) {
+        empRepo.deleteById(id);
+    }
+
+
 }

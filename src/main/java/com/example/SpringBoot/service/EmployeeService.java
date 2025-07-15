@@ -2,48 +2,55 @@
 
 package com.example.SpringBoot.service;
 
-import com.example.SpringBoot.model.Employee;
-import com.example.SpringBoot.repository.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+
+
+import com.example.SpringBoot.model.RegisterDetails;
+import com.example.SpringBoot.repository.RegisterDetailsRepository;
+
 @Service
 public class EmployeeService {
 
-    @Autowired
-    private EmployeeRepo empRepo;
+        @Autowired
+        RegisterDetailsRepository registerDetailsRepository;
+        public List<RegisterDetails> getMethod() {
+            return registerDetailsRepository.findAll();
 
-    public List<Employee> getAllEmployees() {
-        return empRepo.findAll();
-    }
+        }
 
-    public Employee getEmployeeById(int id) {
-        return empRepo.findById(id).orElse(null);
-    }
+        public RegisterDetails getEmployeeById(int empId) {
 
-    public List<Employee> getEmployeesByJob(String job) {
-        return empRepo.findByJob(job);
-    }
+            return registerDetailsRepository.findById(empId).orElse(new RegisterDetails());
+        }
 
-    public Employee getEmployeesByID(int empID) {
-        return empRepo.findById(empID).orElse(null);
-    }
+//    public List<RegisterDetails> getEmployeeByJob() {
+//        return registerDetailsRepository.findByRole();
+//    }
 
-    public String addEmployee(Employee employee) {
-        empRepo.save(employee);
-        return "Employee added successfully";
-    }
+        public String addEmployee(RegisterDetails employee) {
 
-    public Employee updateEmployee(int id, Employee updatedEmployee) {
-        return empRepo.findById(id).map(employee -> {
-            employee.setName(updatedEmployee.getName());
-            employee.setJob(updatedEmployee.getJob());
-            return empRepo.save(employee);
-        }).orElse(null);
-    }
+            registerDetailsRepository.save(employee);
+            return "Employee Added Successfully";
 
-    public void deleteEmployee(int id) {
-        empRepo.deleteById(id);
-    }
+        }
+
+        public String updateEmployee(int empId) {
+
+            RegisterDetails user = registerDetailsRepository.findById(empId)
+                    .orElseThrow(()->new RuntimeException("No Such User Present"));
+            registerDetailsRepository.save(user);
+            return "Employee Updated Successfully";
+
+        }
+
+        public String deleteEmployeeById(int empID) {
+
+            registerDetailsRepository.deleteById(empID);
+            return "Employee Deleted Successfully";
+
+        }
+
 }

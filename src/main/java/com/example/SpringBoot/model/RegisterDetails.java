@@ -28,11 +28,10 @@ public class RegisterDetails {
     private String password;
     @Column(name = "job")
     private String job;
-
     //        private String gender ;
-//
-//        @Column(name="date_of_birth")
-//        private Date dob;
+    //
+    //        @Column(name="date_of_birth")
+    //        private Date dob;
     @Column(name="user_name",nullable = false,unique = true)
     private String username;
     @ManyToMany(fetch =FetchType.EAGER,cascade = CascadeType.ALL)

@@ -1,77 +1,3 @@
-//package com.example.SpringBoot.service;
-//
-//import com.example.SpringBoot.model.RegisterDetails;
-//import com.example.SpringBoot.model.Roles;
-//import com.example.SpringBoot.model.UserDetailDto;
-//import com.example.SpringBoot.repository.RegisterDetailsRepository;
-//import com.example.SpringBoot.repository.RolesRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.stereotype.Service;
-//import java.util.HashSet;
-//import java.util.Set;
-//
-//
-//@Service
-//public class AuthService {
-//
-//
-//        @Autowired
-//        RegisterDetailsRepository registerDetailsRepository;
-//
-//        @Autowired
-//        RolesRepository rolesRepository;
-//
-//        @Autowired
-//        PasswordEncoder passwordEncoder;
-//
-//        public String addNewEmployee(CustomUserDetailService register) {
-//
-//            RegisterDetails registerDetails = new RegisterDetails();
-//            registerDetails.setEmpId(register.getEmpId());
-//            registerDetails.setName(register.getName());
-//            registerDetails.setEmail(register.getEmail());
-//            registerDetails.setPassword(passwordEncoder.encode(register.getpassword()));
-//            registerDetails.setUsername(register.getUsername());
-//            Set<Roles> roles = new HashSet<>();
-//            for(String roleName: register.getRoleNames()){
-//                Roles role = rolesRepository.findByRoleName(roleName)
-//
-//                        .orElseThrow(()->new RuntimeException("User not found" + roleName));
-//                roles.add(role);
-//            }
-//
-//            registerDetails.setRoles(roles);
-//
-//            System.out.println("Registration"+ registerDetails);
-//            registerDetailsRepository.save(registerDetails);
-//
-//            return "Employee Added Successfully";
-//
-//        }
-//
-//
-//        public String authenticate(RegisterDetails login) {
-//
-//            RegisterDetails user = registerDetailsRepository.findByEmail(login.getEmail());
-//
-//            if(user != null){
-//
-//                if (passwordEncoder.matches(login.getPassword(),user.getPassword())){
-//                    return "Login Successful";
-//
-//                }
-//
-//            }
-//
-//            return "Login Not Successful";
-//
-//        }
-//
-//}
-//
-
-
 package com.example.SpringBoot.service;
 
 import com.example.SpringBoot.model.RegisterDetails;
@@ -79,7 +5,7 @@ import com.example.SpringBoot.model.Roles;
 import com.example.SpringBoot.model.UserDetailDto;
 import com.example.SpringBoot.repository.RegisterDetailsRepository;
 
-import com.example.springbootsecond.repository.RegisterRepository;
+import com.example.SpringBoot.repository.RegisterRepository;
 import com.example.SpringBoot.repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -87,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
